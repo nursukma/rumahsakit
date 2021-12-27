@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<!-- jQuery -->
+<script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+<script
+    src="https://cdn.jsdelivr.net/npm/jsignature@2.1.2/libs/jSignature.min.js"></script>
+
+<!--[if lt IE 9]>
+<script type="text/javascript" src="libs/flashcanvas.js"></script>
+<![endif]-->
+
+<!-- jSignature -->
+<style>
+#signature {
+    width: 200px;
+    height: auto;
+    border: 1px black;
+}
+</style>
+<form method="post" action="test.php">
+    <!-- Signature area -->
+    <div id="signature"></div>
+    <br /> <input type='button' id='click' value='click'>
+    <textarea id='output' name='sig'></textarea>
+    <br />
+
+    <!-- Preview image -->
+    <img src='' id='sign_prev' style='display: none;' /> <input
+        type="submit" name="submit">
+</form>
+<!-- Script -->
+<script>
+    $(document).ready(function() {
+
+        // Initialize jSignature
+        var $sigdiv = $("#signature").jSignature({
+            'UndoButton' : true
+        });
+        true
+        $('#click').click(function() {
+            // Get response of type image
+            var data = $sigdiv.jSignature('getData', 'image');
+
+            // Storing in textarea
+            $('#output').val(data);
+
+            // Alter image source 
+            $('#sign_prev').attr('src', "data:" + data);
+            $('#sign_prev').show();
+        });
+    });
+</script>
+</html>
